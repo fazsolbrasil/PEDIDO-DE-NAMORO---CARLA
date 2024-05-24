@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const envelope = document.getElementById('envelope');
+     = document.getElementById('envelope');
     const question = document.getElementById('question');
     const yesButton = document.getElementById('yesButton');
     const noButton = document.getElementById('noButton');
