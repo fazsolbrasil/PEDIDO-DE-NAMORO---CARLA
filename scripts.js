@@ -32,25 +32,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function moveButton(button) {
+        const questionRect = question.getBoundingClientRect();
         const containerRect = document.querySelector('.container').getBoundingClientRect();
         const buttonWidth = button.offsetWidth;
         const buttonHeight = button.offsetHeight;
-        
-        const maxX = window.innerWidth - buttonWidth;
-        const maxY = window.innerHeight - buttonHeight;
-        
-        let x, y;
-        
-        do {
-            x = Math.random() * maxX;
-            y = Math.random() * maxY;
-        } while (
-            x + buttonWidth > containerRect.left &&
-            x < containerRect.right &&
-            y + buttonHeight > containerRect.top &&
-            y < containerRect.bottom
-        );
 
+        // Define limites de movimentação próximo à pergunta
+        const padding = 20; // Espaço extra em pixels ao redor da pergunta
+        const minX = questionRect.left - containerRect.left - buttonWidth - padding;
+        const maxX = questionRect.right - containerRect.left + padding;
+        const minY = questionRect.top - containerRect.top - buttonHeight - padding;
+        const maxY = questionRect.bottom - containerRect.top + padding;
+
+        // Calcular novas posições aleatórias dentro dos limites
+        const x = Math.random() * (maxX - minX) + minX;
+        const y = Math.random() * (maxY - minY) + minY;
+
+        // Definir nova posição do botão
         button.style.position = 'absolute';
         button.style.left = `${x}px`;
         button.style.top = `${y}px`;
